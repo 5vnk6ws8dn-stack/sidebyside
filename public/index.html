@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Side by Side Player</title>
+<meta name="description" content="Play two local videos side by side in sync, with zoom, frame stepping and offset alignment. Videos never leave your device.">
+<meta name="version" content="1.1.1">
+<meta name="theme-color" content="#eef0f3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#13161c" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<!--
+  Side by Side Player
+  Version: 1.1.1   Build: 2026-11-10
+  Changelog
+    1.1.1  2026-11-10  Packaged for GitHub and Cloudflare: separate CSS/JS files, favicon, security headers.
+    1.1.0  2026-11-10  Zoom and pan on each video (wheel, drag, pinch, buttons), linked zoom,
+                       draggable divider between A and B, adjustable viewer height with Fit,
+                       version number and changelog shown in the app.
+    1.0.0  2026-11-10  Synced playback of two local videos, scrubbing, frame step, speed,
+                       B offset with Sync here, loop, stack layout, swap, full screen.
+  When you change this file, bump APP_VERSION in the script and add an entry to CHANGELOG there and here.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/app.css?v=1.1.1">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><h1>Side by Side Player</h1><button class="ver" id="verBtn" title="Version history">v—</button></div>
+    <p class="hint"><kbd>Space</kbd> play · <kbd>,</kbd> <kbd>.</kbd> frame · <kbd>←</kbd> <kbd>→</kbd> 1 s · <kbd>+</kbd> <kbd>−</kbd> zoom · <kbd>0</kbd> reset zoom · scroll or pinch on a video to zoom, drag to pan</p>
+  </header>
+
+  <div class="bay" id="bay">
+    <section class="mon" id="monA">
+      <div class="mon-bar"><span class="tag">A</span><span class="fname" id="nameA">No video loaded</span><span class="tc-small" id="tcA">--:--.---</span></div>
+      <div class="screen" id="scrA">
+        <video id="vA" playsinline preload="auto"></video>
+        <label class="drop" id="dropA" for="fileA"><strong>Drop video A here</strong><span>or click to choose a file</span></label>
+        <div class="out" id="outA" hidden></div>
+        <div class="zbadge" id="zbA" hidden></div>
+        <input type="file" id="fileA" accept="video/*" hidden>
+      </div>
+      <div class="mon-tools">
+        <button id="muteA" aria-pressed="false">Sound on</button>
+        <label class="btn" for="fileA2">Replace…</label><input type="file" id="fileA2" accept="video/*" hidden>
+        <span class="spacer"></span>
+        <span class="zoomset"><button id="zoA" title="Zoom out A">−</button><button class="zval" id="zrA" title="Reset zoom on A">100%</button><button id="ziA" title="Zoom in A">+</button></span>
+      </div>
+    </section>
+    <div class="divider" id="divider" role="separator" aria-orientation="vertical" aria-label="Resize panels" tabindex="0" title="Drag to resize · double-click for 50/50"></div>
+    <section class="mon" id="monB">
+      <div class="mon-bar"><span class="tag">B</span><span class="fname" id="nameB">No video loaded</span><span class="tc-small" id="tcB">--:--.---</span></div>
+      <div class="screen" id="scrB">
+        <video id="vB" playsinline preload="auto" muted></video>
+        <label class="drop" id="dropB" for="fileB"><strong>Drop video B here</strong><span>or click to choose a file</span></label>
+        <div class="out" id="outB" hidden></div>
+        <div class="zbadge" id="zbB" hidden></div>
+        <input type="file" id="fileB" accept="video/*" hidden>
+      </div>
+      <div class="mon-tools">
+        <button id="muteB" aria-pressed="true">Muted</button>
+        <label class="btn" for="fileB2">Replace…</label><input type="file" id="fileB2" accept="video/*" hidden>
+        <span class="spacer"></span>
+        <span class="zoomset"><button id="zoB" title="Zoom out B">−</button><button class="zval" id="zrB" title="Reset zoom on B">100%</button><button id="ziB" title="Zoom in B">+</button></span>
+      </div>
+    </section>
+  </div>
+  <div class="grip" id="grip" role="separator" aria-orientation="horizontal" aria-label="Resize viewer height" tabindex="0" title="Drag to change the viewer height"></div>
+
+  <section class="transport" aria-label="Playback controls">
+    <div class="row">
+      <button class="play" id="play" disabled>Play</button>
+      <button id="back" title="Back one frame" disabled>◀︎ Frame</button>
+      <button id="fwd" title="Forward one frame" disabled>Frame ▶︎</button>
+      <button id="start" title="Go to start" disabled>⏮ Start</button>
+      <span class="sep"></span>
+      <div class="tc" id="tc">00:00.000 <small>/ 00:00.000</small></div>
+      <span class="grow"></span>
+      <div class="group"><span class="lbl tight">Speed</span>
+        <select id="rate"><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option><option value="2">2×</option></select></div>
+      <div class="group"><span class="lbl tight">Frame</span>
+        <select id="fps"><option value="24">24 fps</option><option value="25">25 fps</option><option value="30" selected>30 fps</option><option value="50">50 fps</option><option value="60">60 fps</option></select></div>
+      <button id="loop" aria-pressed="false">Loop</button>
+      <button id="swap">Swap A/B</button>
+      <button id="full">Full screen</button>
+    </div>
+    <div class="scrub"><input type="range" id="scrub" min="0" max="0" step="0.001" value="0" aria-label="Playback position" disabled></div>
+
+    <div class="sub">
+      <span class="lbl">View</span>
+      <button id="layout" aria-pressed="false">Stack</button>
+      <button id="split50" title="Make both panels the same width">50 / 50</button>
+      <span class="sep"></span>
+      <span class="lbl tight">Height</span>
+      <input type="range" id="height" min="160" max="1400" step="10" value="320" aria-label="Viewer height in pixels">
+      <span class="val narrow" id="hVal">Fit</span>
+      <button id="fit" aria-pressed="true">Fit</button>
+      <span class="sep"></span>
+      <button id="link" aria-pressed="true" title="Zoom and pan both videos together">Link zoom</button>
+      <button id="zReset">Reset zoom</button>
+    </div>
+
+    <div class="sub">
+      <span class="lbl">B offset</span>
+      <button id="offM">−1 frame</button>
+      <input type="range" id="off" min="-10" max="10" step="0.001" value="0" aria-label="Offset of video B in seconds">
+      <button id="offP">+1 frame</button>
+      <span class="val" id="offVal">+0.000 s</span>
+      <button id="offMark" title="Use the current position of each video as the shared sync point">Sync here</button>
+      <button id="offZero">Reset</button>
+      <p class="note">Positive offset means B runs ahead of A. To line up two takes, pause, nudge B until the key moment matches A, and the offset is kept for playback.</p>
+    </div>
+  </section>
+
+  <footer><span id="buildLine">Side by Side Player</span><button id="verBtn2">Version history</button></footer>
+</div>
+
+<div class="sheet" id="sheet" hidden>
+  <div class="sheet-card" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <h2 id="sheetTitle"><span>Version history</span><button id="sheetClose">Close</button></h2>
+    <div id="changelog"></div>
+  </div>
+</div>
+
+<script src="assets/app.js?v=1.1.1"></script>
+</body>
+</html>

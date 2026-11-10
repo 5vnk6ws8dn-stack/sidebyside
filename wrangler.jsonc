@@ -1,0 +1,11 @@
+// Cloudflare Workers deployment (static assets only, no server code).
+// Deploy with:  npx wrangler deploy
+// Not needed if you deploy with Cloudflare Pages instead (see README).
+{
+  "name": "side-by-side-player",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "single-page-application"
+  }
+}
