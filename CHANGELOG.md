@@ -2,6 +2,18 @@
 
 All notable changes to Side by Side Player. Versions follow [Semantic Versioning](https://semver.org).
 
+## [1.2.0] - 2026-11-11
+### Added
+- Up to four videos at once: add panels one at a time, or open or drop several files in one go.
+- Layout choices: Auto, Row, 2 × 2 grid and Stack.
+- Resize handles between every column.
+- Each video has its own offset against A, with Sync to A.
+- Reorder panels with ◀ ▶ and remove one with ✕.
+
+### Changed
+- Swap A/B is replaced by the ◀ ▶ reorder buttons.
+- Saved layout preferences use a new key, so earlier saved settings reset once.
+
 ## [1.1.1] - 2026-11-10
 ### Changed
 - Packaged as a GitHub repository ready to deploy on Cloudflare.
