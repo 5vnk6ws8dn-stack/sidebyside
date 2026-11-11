@@ -1,5 +1,9 @@
 # Side by Side Player
 
+**Author:** ©Simon Z. Chan  
+**Version:** 1.2.1  
+**Build:** 2026-11-11 12:17 EST (UTC−05:00)
+
 Play up to four local videos side by side in sync. Scrub, frame-step, zoom and pan them all at once, and line up takes with an adjustable offset for each video. Everything runs in the browser; videos are never uploaded.
 
 Current version: see [`VERSION`](VERSION) and [`CHANGELOG.md`](CHANGELOG.md).
@@ -18,8 +22,8 @@ If you already pushed an earlier version, replace the files with the ones from t
 
 ```bash
 git add -A
-git commit -m "v1.2.0: up to four videos"
-git tag v1.2.0
+git commit -m "v1.2.1: author credit"
+git tag v1.2.1
 git push && git push --tags
 ```
 
@@ -47,7 +51,7 @@ There is no build step. Open `public/index.html` directly to try it locally.
 cd side-by-side-player
 git init
 git add .
-git commit -m "Side by Side Player v1.2.0"
+git commit -m "Side by Side Player v1.2.1"
 git branch -M main
 git remote add origin https://github.com/<your-username>/side-by-side-player.git
 git push -u origin main
@@ -83,7 +87,7 @@ In the project's **Custom domains** (Pages) or **Domains & Routes** (Workers) se
 ## Releasing a new version
 
 1. Make your changes.
-2. Bump the version in **four places**: `VERSION`, `APP_VERSION` in `public/assets/app.js`, the `<meta name="version">` and `?v=` query strings in `public/index.html`.
+2. Update the author header date and time in each file, and bump the version in **four places**: `VERSION`, `APP_VERSION` in `public/assets/app.js`, the `<meta name="version">` and `?v=` query strings in `public/index.html`.
 3. Add an entry at the top of `CHANGELOG.md` and of the `CHANGELOG` array in `app.js`.
 4. Commit, tag and push:
    ```bash
@@ -96,3 +100,7 @@ Cloudflare redeploys on push. The `?v=` query strings make browsers fetch the ne
 ## Privacy
 
 Videos are opened with the browser's file picker and played from memory. Nothing is sent to any server. The only external request is for the IBM Plex fonts from Google Fonts; remove those two `<link>` tags and the font host entries in `_headers` if you want zero third-party requests.
+
+## Author
+
+©Simon Z. Chan. Copyright ©Simon Z. Chan 2026. All rights reserved.

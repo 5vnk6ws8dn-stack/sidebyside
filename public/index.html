@@ -5,14 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Side by Side Player</title>
 <meta name="description" content="Play up to four local videos side by side in sync, with zoom, frame stepping and offset alignment. Videos never leave your device.">
-<meta name="version" content="1.2.0">
+<meta name="author" content="Simon Z. Chan">
+<meta name="version" content="1.2.1">
 <meta name="theme-color" content="#eef0f3" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#13161c" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <!--
   Side by Side Player
-  Version: 1.2.0   Build: 2026-11-11
+  Author:  ©Simon Z. Chan
+  Version: 1.2.1   Build: 2026-11-11 12:17 EST (UTC−05:00)
+  Copyright ©Simon Z. Chan 2026. All rights reserved.
   Changelog
+    1.2.1  2026-11-11 12:17  Author credit and build date and time in all files and in the app footer.
     1.2.0  2026-11-11  Up to four videos at once, layout choices (Auto, Row, 2x2 grid, Stack),
                        resizable columns, per-video offset with Sync to A, reorder and remove panels.
     1.1.1  2026-11-10  Packaged for GitHub and Cloudflare: separate CSS/JS files, favicon, security headers.
@@ -26,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="assets/app.css?v=1.2.0">
+<link rel="stylesheet" href="assets/app.css?v=1.2.1">
 </head>
 <body>
 <div class="wrap">
@@ -78,7 +82,7 @@
     <div class="offsets" id="offsets"></div>
   </section>
 
-  <footer><span id="buildLine">Side by Side Player</span><button id="verBtn2">Version history</button></footer>
+  <footer><span id="buildLine">Side by Side Player · ©Simon Z. Chan</span><button id="verBtn2">Version history</button></footer>
 </div>
 
 <div class="sheet" id="sheet" hidden>
@@ -88,6 +92,6 @@
   </div>
 </div>
 
-<script src="assets/app.js?v=1.2.0"></script>
+<script src="assets/app.js?v=1.2.1"></script>
 </body>
 </html>

@@ -1,6 +1,12 @@
 # Changelog
 
-All notable changes to Side by Side Player. Versions follow [Semantic Versioning](https://semver.org).
+All notable changes to Side by Side Player.
+Author: ©Simon Z. Chan. Versions follow [Semantic Versioning](https://semver.org).
+
+## [1.2.1] - 2026-11-11 12:17 EST
+### Added
+- Author credit (©Simon Z. Chan) with build date and time in every source file, in the page metadata and in the app footer.
+- `AUTHORS` file.
 
 ## [1.2.0] - 2026-11-11
 ### Added

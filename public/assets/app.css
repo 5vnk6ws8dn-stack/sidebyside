@@ -1,4 +1,10 @@
-/* Side by Side Player v1.2.0 */
+/*
+ * Side by Side Player — stylesheet
+ * Author:  ©Simon Z. Chan
+ * Version: 1.2.1
+ * Build:   2026-11-11 12:17 EST (UTC−05:00)
+ * Copyright ©Simon Z. Chan 2026. All rights reserved.
+ */
 /* Layout: a monitor wall of one to four viewers (row, 2x2 grid or stack) with drag handles, transport strip underneath, like an edit suite's multi-cam viewer. */
 :root{
   --bg:#eef0f3; --panel:#ffffff; --well:#dfe3e9; --line:#c9cfd8;

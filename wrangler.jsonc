@@ -1,5 +1,6 @@
-// Cloudflare Workers deployment (static assets only, no server code).
-// Deploy with:  npx wrangler deploy
+// Side by Side Player — Cloudflare Workers config
+// Author: ©Simon Z. Chan  ·  Version: 1.2.1  ·  Build: 2026-11-11 12:17 EST (UTC−05:00)
+// Static assets only, no server code. Deploy with:  npx wrangler deploy
 // Not needed if you deploy with Cloudflare Pages instead (see README).
 {
   "name": "side-by-side-player",

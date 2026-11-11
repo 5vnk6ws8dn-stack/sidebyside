@@ -1,9 +1,20 @@
-/* Side by Side Player v1.2.0 — keep APP_VERSION and CHANGELOG in step with CHANGELOG.md */
+/*
+ * Side by Side Player — application script (keep APP_VERSION and CHANGELOG in step with CHANGELOG.md)
+ * Author:  ©Simon Z. Chan
+ * Version: 1.2.1
+ * Build:   2026-11-11 12:17 EST (UTC−05:00)
+ * Copyright ©Simon Z. Chan 2026. All rights reserved.
+ */
 (function(){
 /* ---------- Version control ---------- */
-const APP_VERSION='1.2.0';
-const APP_BUILD='2026-11-11';
+/*  Author: ©Simon Z. Chan  ·  Build: 2026-11-11 12:17 EST (UTC−05:00)  */
+const APP_VERSION='1.2.1';
+const APP_AUTHOR='©Simon Z. Chan';
+const APP_BUILD='2026-11-11 12:17 EST (UTC−05:00)';
 const CHANGELOG=[
+  {v:'1.2.1',date:'2026-11-11 12:17',items:[
+    'Author credit (©Simon Z. Chan) with build date and time in every file and in the footer'
+  ]},
   {v:'1.2.0',date:'2026-11-11',items:[
     'Up to four videos at once: add panels one at a time, or open or drop several files in one go',
     'Layout choices: Auto, Row, 2 × 2 grid and Stack',
@@ -32,7 +43,7 @@ const CHANGELOG=[
 const MAX=4, LETTERS='ABCD';
 const $=id=>document.getElementById(id);
 $('verBtn').textContent='v'+APP_VERSION;
-$('buildLine').textContent='Side by Side Player v'+APP_VERSION+' · build '+APP_BUILD;
+$('buildLine').textContent='Side by Side Player v'+APP_VERSION+' · build '+APP_BUILD+' · '+APP_AUTHOR;
 $('changelog').innerHTML=CHANGELOG.map((r,i)=>'<div class="rel"><h3>v'+r.v+' <span>'+r.date+'</span>'+(i===0?'<span class="cur">Current</span>':'')+'</h3><ul>'+r.items.map(x=>'<li>'+x+'</li>').join('')+'</ul></div>').join('');
 const openSheet=()=>{$('sheet').hidden=false;$('sheetClose').focus()};
 $('verBtn').onclick=openSheet;$('verBtn2').onclick=openSheet;
